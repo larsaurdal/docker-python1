@@ -8,7 +8,6 @@ RUN cd /usr/local/src/opencv && \
     echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf && ldconfig && \
     cp /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so /opt/conda/lib/python3.4/site-packages/ 
 
-
 RUN apt-get -y install libgeos-dev && \
     cd /usr/local/src && git clone https://github.com/matplotlib/basemap.git && \
     export GEOS_DIR=/usr/local && \
@@ -33,4 +32,3 @@ RUN cd /usr/local/src && git clone --recursive https://github.com/dmlc/mxnet && 
     sed -i 's/CXX = g++/CXX = g++-4.8/' config.mk && \
     sed -i 's/ADD_LDFLAGS =/ADD_LDFLAGS = -lstdc++/' config.mk && \
     make && cd python && python setup.py install
-
