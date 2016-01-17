@@ -103,3 +103,19 @@ verbnet webtext word2vec_sample wordnet wordnet_ic words ycoe && \
     pip install tpot && \
     # haversine
     pip install haversine
+
+    # Prepare for OpenCV 3
+RUN apt-get update && \
+    # The apt-get version of imagemagick has gone mad, and wants to remove sysvinit.
+    apt-get -y build-dep imagemagick && \
+    wget http://www.imagemagick.org/download/ImageMagick-6.9.3-0.tar.gz && \
+    tar xzf ImageMagick-6.9.3-0.tar.gz && cd ImageMagick-6.9.3-0 && ./configure && \
+    make && make install && \
+    apt-get -y install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev && \
+    apt-get -y install libtbb2 libtbb-dev libjpeg-dev libtiff-dev libjasper-dev && \
+    # apt-get gives you cmake 2.8, which fails to find Py3.4's libraries and headers. The current
+    # version is cmake 3.2, which does.
+    cd /usr/local/src && git clone https://github.com/Kitware/CMake.git && \
+    # --system-curl needed for OpenCV's IPP download, see https://stackoverflow.com/questions/29816529/unsupported-protocol-while-downlod-tar-gz-package/32370027#32370027
+    cd CMake && ./bootstrap --system-curl && make && make install && \
+    cd /usr/local/src && git clone https://github.com/Itseez/opencv.git
