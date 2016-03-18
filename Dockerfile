@@ -24,6 +24,8 @@ RUN apt-get -y install libgeos-dev && \
     cd Shapely && python setup.py install && \
     cd /usr/local/src && git clone https://github.com/SciTools/cartopy.git && \
     cd cartopy && python setup.py install && \
+    # sasl is apparently an ibis dependency
+    apt-get -y install libsasl2-dev && \
     pip install ibis-framework
 
     # MXNet
