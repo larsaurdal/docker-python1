@@ -9,6 +9,8 @@ RUN cd /usr/local/src/opencv && \
     cp /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so /opt/conda/lib/python3.4/site-packages/ 
 
 RUN apt-get -y install libgeos-dev && \
+    # pyshp and pyproj are now external dependencies of Basemap
+    pip install pyshp pyproj && \
     cd /usr/local/src && git clone https://github.com/matplotlib/basemap.git && \
     export GEOS_DIR=/usr/local && \
     cd basemap && python setup.py install && \
