@@ -21,11 +21,11 @@ RUN apt-get -y install libgeos-dev && \
     cd opendeep && python setup.py develop  && \
     # sasl is apparently an ibis dependency
     apt-get -y install libsasl2-dev && \
-    pip install ibis-framework
-
-    # MXNet
-RUN cd /usr/local/src && git clone --recursive https://github.com/dmlc/mxnet && \
-    cd /usr/local/src/mxnet && cp make/config.mk . && sed -i 's/CC = gcc/CC = gcc-4.8/' config.mk && \
-    sed -i 's/CXX = g++/CXX = g++-4.8/' config.mk && \
-    sed -i 's/ADD_LDFLAGS =/ADD_LDFLAGS = -lstdc++/' config.mk && \
-    make && cd python && python setup.py install
+    pip install ibis-framework && \
+    # Cartopy plus dependencies
+    yes | conda install proj4 && \
+    pip install packaging && \
+    cd /usr/local/src && git clone https://github.com/Toblerity/Shapely.git && \
+    cd Shapely && python setup.py install && \
+    cd /usr/local/src && git clone https://github.com/SciTools/cartopy.git && \
+    cd cartopy && python setup.py install
