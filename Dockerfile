@@ -1,6 +1,7 @@
 FROM kaggle/python0:latest
 
-RUN pip install pytagcloud pyyaml ggplot joblib husl geopy ml_metrics mne pyshp gensim && \
+RUN pip install seaborn python-dateutil spacy dask pytagcloud pyyaml ggplot joblib \
+    husl geopy ml_metrics mne pyshp gensim && \
     apt-get install -y libfreetype6-dev && \
     apt-get install -y libglib2.0-0 libxext6 libsm6 libxrender1 libfontconfig1 --fix-missing && \
     # textblob
