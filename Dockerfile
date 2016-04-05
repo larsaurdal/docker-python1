@@ -15,10 +15,4 @@ RUN pip install seaborn python-dateutil spacy dask pytagcloud pyyaml ggplot jobl
     # textblob
     pip install textblob && \
     #word cloud
-    pip install git+git://github.com/amueller/word_cloud.git && \
-    #igraph
-    pip install python-igraph && \
-    #xgboost
-    cd /usr/local/src && mkdir xgboost && cd xgboost && \
-    git clone --recursive https://github.com/dmlc/xgboost.git && cd xgboost && \
-    make && cd python-package && python setup.py install
+    pip install git+git://github.com/amueller/word_cloud.git
